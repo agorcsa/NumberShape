@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
 
     private int number;
+    private String typedNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public int checkNumber(int number) {
+    public int checkNumber() {
+        typedNumber = editText.getText().toString();
+        number = Integer.valueOf(typedNumber);
         if (isTriangleNum(number) && !isSquareNum(number)) {
             return 1;
         } else if (!isTriangleNum(number) && isSquareNum(number)) {
@@ -69,16 +72,17 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(TAG, "Button was clicked");
 
-        String typedNumber = editText.getText().toString();
+        typedNumber = editText.getText().toString();
 
-        if (checkNumber(number) == 1) {
+        if (checkNumber() == 1) {
             showToast(typedNumber + " is a triangle number");
-        } else if (checkNumber(number) == 2) {
+        } else if (checkNumber() == 2) {
             showToast(typedNumber + " is a square number");
-        } else if (checkNumber(number) == 3) {
+        } else if (checkNumber() == 3) {
             showToast(typedNumber + " is both");
         } else {
             showToast(typedNumber + " is none");
         }
     }
 }
+
