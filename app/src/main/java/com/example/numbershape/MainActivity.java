@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean isSquareNum(int number) {
-        int squared = (8 * number) + 1;
-        if (Math.sqrt(squared) == 1) {
+        double squareRoot  = Math.sqrt(number);
+        if (squareRoot == Math.floor(squareRoot)){
             return true;
         }
         return false;
