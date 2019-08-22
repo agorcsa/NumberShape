@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
 
     private int number;
-    private String typedNumber;
+    private int myNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +31,6 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
     }
 
-    public boolean isTriangleNum(int number) {
-        int triangular = (8 * number) + 1;
-        if (Math.sqrt(triangular) % 2 == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isSquareNum(int number) {
-        double squareRoot  = Math.sqrt(number);
-        if (squareRoot == Math.floor(squareRoot)){
-            return true;
-        }
-        return false;
-    }
-
-    public int checkNumber() {
-        typedNumber = editText.getText().toString();
-        number = Integer.valueOf(typedNumber);
-        if (isTriangleNum(number) && !isSquareNum(number)) {
-            return 1;
-        } else if (!isTriangleNum(number) && isSquareNum(number)) {
-            return 2;
-        } else if (isTriangleNum(number) && isSquareNum(number)) {
-            return 3;
-        } else {
-            return 4;
-        }
-    }
 
     public void showToast(String string) {
 
@@ -68,20 +40,64 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(context, string, duration).show();
     }
 
-    public void displayMessage(View view) {
-
-        Log.i(TAG, "Button was clicked");
-
-        typedNumber = editText.getText().toString();
-
-        if (checkNumber() == 1) {
-            showToast(typedNumber + " is a triangle number");
-        } else if (checkNumber() == 2) {
-            showToast(typedNumber + " is a square number");
-        } else if (checkNumber() == 3) {
-            showToast(typedNumber + " is both");
+    public void checkNumber(View view) {
+        Number myNumber = new Number();
+        String typedNumber = editText.getText().toString();
+        if (typedNumber.isEmpty()) {
+            showToast("Please type a number");
         } else {
-            showToast(typedNumber + " is none");
+            myNumber.number = Integer.valueOf(typedNumber);
+
+            if (myNumber.isTriangular() && !myNumber.isSquare()) {
+                showToast(myNumber.getNumber() + " is triangle number");
+            } else if (!myNumber.isTriangular() && myNumber.isSquare()) {
+                showToast(myNumber.getNumber() + " is square number");
+            } else if (myNumber.isTriangular() && myNumber.isSquare()) {
+                showToast(myNumber.getNumber() + " is both");
+            } else {
+                showToast(myNumber.getNumber()+ " is none");
+            }
+        }
+    }
+
+    class Number {
+
+        int number;
+
+        public int getNumber() {
+            return number;
+        }
+
+        public boolean isTriangular() {
+            // counter variable
+            int x = 1;
+            // triangular number
+            int triangularNumber = 1;
+            // we will generate triangular numbers till our input nr will reach the tri number
+
+            while (triangularNumber < number) {
+
+                x++;
+
+                triangularNumber = triangularNumber + x;
+
+            }
+
+            if (triangularNumber == number) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean isSquare() {
+            double squareRoot = Math.sqrt(number);
+
+            if (squareRoot == Math.floor(squareRoot)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
