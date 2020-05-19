@@ -14,7 +14,7 @@
         android:layout_below="@id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:onClick="displayMessage"
+        android:onClick="checkNumber"
         android:text="Check" />
 
     <EditText
@@ -26,4 +26,24 @@
         android:gravity="center"
         android:hint="Enter your number..."
         android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:text="Number Shapes"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="Enter a number below and find out if the number is triangular, square, both or none"
+        android:textSize="18sp" />
 </RelativeLayout>
